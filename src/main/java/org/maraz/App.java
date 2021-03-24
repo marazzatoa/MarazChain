@@ -28,9 +28,17 @@ public class App
         payload = new Payload("amount", 15.0);
         cal.set(2021, Calendar.MARCH, 10);
         date = cal.getTime();
-        block = new Block(1, date, payload, null);
+        block = new Block(2, date, payload, null);
+        marazChain.addBlock(block);
+
+        payload = new Payload("amount", 25.0);
+        cal.set(2021, Calendar.MARCH, 15);
+        date = cal.getTime();
+        block = new Block(3, date, payload, null);
         marazChain.addBlock(block);
 
         marazChain.print();
+
+        System.out.printf("is marazChain valid? %b", marazChain.isChainValid());
     }
 }

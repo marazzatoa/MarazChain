@@ -31,6 +31,20 @@ public class Blockchain {
         chain.add(newBlock);
     }
 
+    public boolean isChainValid(){
+        for(int i=1;i< chain.size();i++){
+            Block currentBlock = chain.get(i);
+            Block previousBlock = chain.get(i-1);
+            if(!currentBlock.getHash().equals(currentBlock.generateSha256Hash())){
+                return false;
+            }
+            if(!currentBlock.getPreviousHash().equals(previousBlock.getHash())){
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Blockchain{" +
