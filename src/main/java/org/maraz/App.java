@@ -28,17 +28,21 @@ public class App
         payload = new Payload("amount", 15.0);
         cal.set(2021, Calendar.MARCH, 10);
         date = cal.getTime();
-        block = new Block(2, date, payload, null);
-        marazChain.addBlock(block);
+        Block block2 = new Block(2, date, payload, null);
+        marazChain.addBlock(block2);
 
         payload = new Payload("amount", 25.0);
         cal.set(2021, Calendar.MARCH, 15);
         date = cal.getTime();
-        block = new Block(3, date, payload, null);
-        marazChain.addBlock(block);
+        Block block3 = new Block(3, date, payload, null);
+        marazChain.addBlock(block3);
 
         marazChain.print();
 
-        System.out.printf("is marazChain valid? %b", marazChain.isChainValid());
+        System.out.printf("is marazChain valid? %b%n", marazChain.isChainValid());
+        //tampering block #2
+        payload = new Payload("amount", 35.0);
+        block2.setPayload(payload);
+        System.out.printf("is marazChain valid? %b%n", marazChain.isChainValid());
     }
 }
