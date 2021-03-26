@@ -10,6 +10,7 @@ public class Block{
     private Payload payload;
     private String previousHash;
     private String hash;
+    private Integer nonce;
 
     public Block(long index, Date date, Payload payload, String previousHash) {
         this.index = index;
@@ -17,10 +18,19 @@ public class Block{
         this.payload = payload;
         this.previousHash = previousHash;
         this.hash = generateSha256Hash();
+        this.nonce = 0;
     }
 
     public String generateSha256Hash(){
-        return DigestUtils.sha256Hex(String.valueOf(getIndex())+getDate().toString()+getPayload().toString()+getPreviousHash());
+        return DigestUtils.sha256Hex(String.valueOf(getIndex())+getDate().toString()+getPayload().toString()+getPreviousHash()+getNonce());
+    }
+
+    public void mining(int difficulty){
+        while(!this.hash.substring(0, difficulty).equals("000")){
+            this.nonce++;
+            this.hash = generateSha256Hash();
+        }
+        System.out.println("Block mined");
     }
 
     public long getIndex() {
@@ -61,6 +71,14 @@ public class Block{
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public Integer getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(Integer nonce) {
+        this.nonce = nonce;
     }
 
     @Override
