@@ -23,26 +23,25 @@ public class App
         cal.set(2021, Calendar.MARCH, 1);
         Date date = cal.getTime();
         Block block = new Block(1, date, payload, null);
+        System.out.println("mining block #1");
         marazChain.addBlock(block);
 
         payload = new Payload("amount", 15.0);
         cal.set(2021, Calendar.MARCH, 10);
         date = cal.getTime();
         Block block2 = new Block(2, date, payload, null);
+        System.out.println("mining block #2");
         marazChain.addBlock(block2);
 
         payload = new Payload("amount", 25.0);
         cal.set(2021, Calendar.MARCH, 15);
         date = cal.getTime();
         Block block3 = new Block(3, date, payload, null);
+        System.out.println("mining block #3");
         marazChain.addBlock(block3);
 
-        marazChain.print();
+        //marazChain.print();
 
-        System.out.printf("is marazChain valid? %b%n", marazChain.isChainValid());
-        //tampering block #2
-        payload = new Payload("amount", 35.0);
-        block2.setPayload(payload);
-        System.out.printf("is marazChain valid? %b%n", marazChain.isChainValid());
+
     }
 }

@@ -30,7 +30,7 @@ public class Block{
             this.nonce++;
             this.hash = generateSha256Hash();
         }
-        System.out.println("Block mined");
+        System.out.printf("Block mined %s%n", this.hash);
     }
 
     public long getIndex() {

@@ -7,9 +7,11 @@ import java.util.List;
 
 public class Blockchain {
     private List<Block> chain = new ArrayList<>();
+    private int difficulty;
 
     public Blockchain(){
         chain.add(createGenesisBlock());
+        setDifficulty(3);
     }
 
     private Block createGenesisBlock(){
@@ -27,7 +29,7 @@ public class Blockchain {
 
     public void addBlock(Block newBlock){
         newBlock.setPreviousHash(getLatestBlock().getHash());
-        newBlock.setHash(newBlock.generateSha256Hash());
+        newBlock.mining(getDifficulty());
         chain.add(newBlock);
     }
 
@@ -54,5 +56,13 @@ public class Blockchain {
 
     public void print(){
         chain.stream().forEach(System.out::println);
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }
